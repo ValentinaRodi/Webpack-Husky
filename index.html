@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <section class="fon">
-        <div class="block">
-            <h1 class="block__title">Выбери сложность</h1>
-            <div class="block__level">
-                <label for="level1">
-                    <div class="block__level_difficulty">1</div>
-                </label>
-                <input class="block__control" type="radio" id="level1" name="rating" value="1">
-                <label for="level2">
-                    <div class="block__level_difficulty">2</div>
-                </label>	
-                <input class="block__control" type="radio" id="level2" name="rating" value="2">
-                <label for="level3">
-                    <div class="block__level_difficulty">3</div>
-                </label>
-                <input class="block__control" type="radio" id="level3" name="rating" value="3">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            @font-face {
+                font-family: 'StratosSkyeng';
+                src: url('STRATOSSKYENG-REGULAR.OTF');
+            }
+        </style>
+        <link rel="stylesheet" href="src/style.css" />
+    </head>
+    <body>
+        <section class="fon">
+            <div class="block">
+                <h1 class="block-title">Выбери сложность</h1>
+                <div class="block-level">
+                    <label for="level1">
+                        <div class="block-level-difficulty">1</div>
+                    </label>
+                    <input
+                        class="block-control"
+                        type="radio"
+                        id="level1"
+                        name="rating"
+                        value="1"
+                    />
+                    <label for="level2">
+                        <div class="block-level-difficulty">2</div>
+                    </label>
+                    <input
+                        class="block-control"
+                        type="radio"
+                        id="level2"
+                        name="rating"
+                        value="2"
+                    />
+                    <label for="level3">
+                        <div class="block-level-difficulty">3</div>
+                    </label>
+                    <input
+                        class="block-control"
+                        type="radio"
+                        id="level3"
+                        name="rating"
+                        value="3"
+                    />
+                </div>
+                <button class="block-btn">Старт</button>
             </div>
-            <button class="block__btn">Старт</button>
-        </div>
-    </section>
-</body>
+        </section>
+    </body>
 </html>

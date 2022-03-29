@@ -1,0 +1,39 @@
+{
+    "name": "hw4",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "http-server -p 3001",
+        "format": "prettier --write ./src",
+        "lint:js": "eslint ./src/**.js",
+        "lint:css": "stylelint ./src/**/*.css",
+        "prepare": "husky install",
+        "lint": "npm run lint:js && npm run lint:css"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ValentinaRodi/HomeWork4.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ValentinaRodi/HomeWork4/issues"
+    },
+    "homepage": "https://github.com/ValentinaRodi/HomeWork4#readme",
+    "dependencies": {
+        "http-server": "^14.1.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.12.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "husky": "^7.0.4",
+        "prettier": "^2.6.1",
+        "stylelint": "^14.6.1",
+        "stylelint-config-prettier": "^9.0.3",
+        "stylelint-config-standard": "^25.0.0",
+        "stylelint-prettier": "^2.0.0"
+    },
+    "description": ""
+}
