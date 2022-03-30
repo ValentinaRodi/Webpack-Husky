@@ -13,5 +13,8 @@
         "prettier/prettier": "error",
         "camelcase": ["error"],
         "eqeqeq": ["error", "always"]
+    },
+    "parserOptions": {
+        "sourceType": "module"
     }
 }

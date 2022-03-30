@@ -65,6 +65,10 @@ body {
     border: 3px solid #0080c1;
 }
 
+.block-level-border {
+    border: 3px solid #0080c1;
+}
+
 .block-btn {
     width: 246px;
     height: 50px;
@@ -83,7 +87,6 @@ body {
 
 .fon-play {
     min-height: 100vh;
-    padding: 32px;
     background-color: #004980;
     display: flex;
     flex-direction: column;
@@ -93,6 +96,7 @@ body {
 .play-timer {
     height: 80px;
     width: 980px;
+    padding: 32px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -153,9 +157,15 @@ body {
 
 .play-card {
     width: 980px;
+    margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 8px;
+}
+
+.block2 {
+    width: 700px;
 }
 
 .card {
@@ -172,7 +182,6 @@ body {
 .block-popap {
     width: 480px;
     height: 459px;
-    margin-bottom: 30px;
     background: #c2f5ff;
     border-radius: 12px;
     display: flex;
@@ -209,4 +218,8 @@ body {
     font-size: 64px;
     line-height: 72px;
     color: #000;
+}
+
+.noshow {
+    display: none;
 }
