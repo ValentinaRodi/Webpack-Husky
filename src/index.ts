@@ -129,20 +129,36 @@ btnLevel[0].addEventListener('click', (event) => {
             getRandomRiver(3, arrCard)
             timeMinut = 5
             intervalID = setInterval(timerDown, 1000)
+
+            setTimeout(getClikcCard, 7000)
         }
         if (checkLevel === '2') {
             playCard.classList.add('play-card2')
             getRandomRiver(6, arrCard)
             timeMinut = 10
             intervalID = setInterval(timerDown, 1000)
+
         }
         if (checkLevel === '3') {
             getRandomRiver(9, arrCard)
             timeMinut = 20
             intervalID = setInterval(timerDown, 1000)
+
         }
     }
 })
+
+function getClikcCard() {
+    const playAddCard: any = playPage.querySelector('.card')!
+    
+    if (playAddCard.src === ImgShirt) {
+        playCard.addEventListener('click', (event: any) => {
+            getChoseCard(event)
+        })
+        
+    }
+}
+
 let indexCard: any = []
 
 function getRandomRiver(n: any, arr: any) {
@@ -183,14 +199,12 @@ function timerDown() {
     let seconds = timeMinut % 60
     if (timeMinut < 0) {
         clearInterval(intervalID)
-
+        
         const playAddCard = playPage.querySelectorAll('.card')!
         let cardShirt: any
         for (cardShirt of playAddCard) {
             cardShirt.src = ImgShirt
         }
-        
-        
         intervalID = setInterval(timerUp, 1000)
     } else {
         timerSekShow.textContent = String(
@@ -200,13 +214,49 @@ function timerDown() {
     --timeMinut
 }
 
-let clickCard: string
+let clickCard: any
 let numberCard: any
 let seconds = 0
 let minutes = 0
+let choseCard: any[] = []
+
+function getChoseCard(event: any) {
+        
+    if (clickCard === undefined) {
+        clickCard = event.target.id
+        for (const cardShirt of cards) {
+            
+            if (clickCard === cardShirt.id) {
+                numberCard = cardShirt.name
+                cardShirt.src = arrCard[numberCard]
+                choseCard.push(cardShirt)
+            }
+        }
+        return
+    } else {
+        if (event.target.name === choseCard[0].name) {
+            for (const cardShirt of cards) {
+                if (event.target.id === cardShirt.id) {
+                    numberCard = choseCard[0].name
+                    choseCard.splice(0, 1)
+                    cardShirt.src = arrCard[numberCard]
+                    clickCard = undefined
+                }
+            }
+            const foundCardShirt = cards.find(
+                (cardShirt) => cardShirt.src === ImgShirt
+            )
+            if (foundCardShirt === undefined) {
+                return showWin()
+            }
+            return
+        } else {
+            return showLose()
+        }
+    }
+}
 
 function timerUp() {
-    
     if (minutes === 60) {
         clearInterval(intervalID)
         showLose()
@@ -214,43 +264,6 @@ function timerUp() {
             location.reload()
         })
     } else {
-        playCard.addEventListener('click', (event: any) => {
-            // while (cards.length > 0) {
-            //     getChoseCard()
-            // }
-            //function getChoseCard() {
-                if (clickCard === undefined) {
-                    clickCard = event.target.id
-                    for (const cardShirt of cards) {
-
-                        if (clickCard === cardShirt.id) {
-                            numberCard = cardShirt.name
-                            let indexCard = cards.indexOf(cardShirt)
-                            cards.splice(indexCard, 1)
-                            cardShirt.src = arrCard[numberCard]
-                        }
-                    }
-                    console.log(cards)
-                    return
-                } else {
-                    for (const cardShirt of cards) {
-                        if (event.target.id === cardShirt.id) {
-                            console.log('showWin()')
-                            clickCard = ''
-                            numberCard = cardShirt.name
-                            let indexCard = cards.indexOf(cardShirt)
-                            delete cards[indexCard]
-                            cardShirt.src = arrCard[numberCard]
-                        } else {
-                            console.log('lose')
-                            return showLose()
-                        }
-                    }
-                   
-                }   
-            //}
-        })
-
         timerSekShow.textContent = String(
             seconds < 10 ? '0' + seconds : seconds
         )
@@ -280,8 +293,7 @@ function showWin() {
     let popap = new Image()
     popap.src = ImgWin
     popapWin.appendChild(popap)
-    console.log(seconds)
-    console.log(minutes)
+    
     timerSekShowStop[0].textContent = String(
         seconds < 10 ? '0' + seconds : seconds
     )
@@ -302,8 +314,7 @@ function showLose() {
     let popap = new Image()
     popap.src = ImgLose
     popapLose.appendChild(popap)
-    console.log(seconds)
-    console.log(minutes)
+    
     timerSekShowStop[1].textContent = String(
         seconds < 10 ? '0' + seconds : seconds
     )
