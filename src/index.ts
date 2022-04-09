@@ -1,4 +1,5 @@
 import './style.css'
+
 import Img1 from './img/10 пики.jpg'
 import Img2 from './img/6 пики.jpg'
 import Img3 from './img/6 черви.jpg'
@@ -81,7 +82,7 @@ const arrCard = [
 const levelPage = document.querySelector('.fon')!
 const blockLevel = levelPage.querySelector('.block-level')!
 const btnLevel = levelPage.querySelectorAll('.block-btn')!
-const levelDifficulty = levelPage.querySelectorAll('.block-level-difficulty')!
+const levelDifficulty: any = levelPage.querySelectorAll('.block-level-difficulty')!
 const timerSekShowStop = levelPage.querySelectorAll('.sek')!
 const timerMinShowStop = levelPage.querySelectorAll('.min')!
 const playPage = document.querySelector('.fon-play')!
@@ -100,7 +101,7 @@ blockLevel.addEventListener('click', (event: any) => {
     checkLevel = event.target.value
     for (const levelCheck of levelDifficulty) {
         let lev
-        
+
         if (event.target.value === (levelCheck as HTMLElement).dataset.rating) {
             lev = (levelCheck as HTMLElement).dataset.rating
 
@@ -124,44 +125,45 @@ btnLevel[0].addEventListener('click', (event) => {
     } else {
         levelPage.classList.add('noshow')
         playPage.classList.remove('noshow')
-
-        if (checkLevel === '1') {
-            getRandomRiver(3, arrCard)
-            timeMinut = 5
-            intervalID = setInterval(timerDown, 1000)
-
-            setTimeout(getClikcCard, 7000)
-        }
-        if (checkLevel === '2') {
-            playCard.classList.add('play-card2')
-            getRandomRiver(6, arrCard)
-            timeMinut = 10
-            intervalID = setInterval(timerDown, 1000)
-
-        }
-        if (checkLevel === '3') {
-            getRandomRiver(9, arrCard)
-            timeMinut = 20
-            intervalID = setInterval(timerDown, 1000)
-
-        }
+        showScreenCard()
     }
 })
 
+function showScreenCard() {
+    if (checkLevel === '1') {
+        getRandomRiver(3, arrCard)
+        timeMinut = 5
+        intervalID = setInterval(timerDown, 1000)
+
+        setTimeout(getClikcCard, 7000)
+    }
+    if (checkLevel === '2') {
+        playCard.classList.add('play-card2')
+        getRandomRiver(6, arrCard)
+        timeMinut = 10
+        intervalID = setInterval(timerDown, 1000)
+    }
+    if (checkLevel === '3') {
+        getRandomRiver(9, arrCard)
+        timeMinut = 20
+        intervalID = setInterval(timerDown, 1000)
+    }
+}
+
 function getClikcCard() {
     const playAddCard: any = playPage.querySelector('.card')!
-    
+
     if (playAddCard.src === ImgShirt) {
         playCard.addEventListener('click', (event: any) => {
             getChoseCard(event)
         })
-        
     }
 }
 
+
 let indexCard: any = []
 
-function getRandomRiver(n: any, arr: any) {
+export function getRandomRiver(n: number, arr: string []) {
     const indexes = new Set()
     const limit = arr.length
     n = Math.min(n, limit)
@@ -172,6 +174,8 @@ function getRandomRiver(n: any, arr: any) {
         cardAdd.src = arrCard[index]
         cardAdd.name = index
         cardAdd.classList.add('card')
+        
+        //pushNewCards(cardAdd, cards)
         let clone = cardAdd.cloneNode(true)
         cards.push(cardAdd)
         cards.push(clone)
@@ -181,8 +185,8 @@ function getRandomRiver(n: any, arr: any) {
     return
 }
 
-let cardAdd: any
-let cards: any[] = []
+export let cardAdd: any
+export let cards: any[] = []
 
 function shuffleArray(array: any) {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -199,8 +203,8 @@ function timerDown() {
     let seconds = timeMinut % 60
     if (timeMinut < 0) {
         clearInterval(intervalID)
-        
-        const playAddCard = playPage.querySelectorAll('.card')!
+
+        const playAddCard: any = playPage.querySelectorAll('.card')!
         let cardShirt: any
         for (cardShirt of playAddCard) {
             cardShirt.src = ImgShirt
@@ -221,11 +225,10 @@ let minutes = 0
 let choseCard: any[] = []
 
 function getChoseCard(event: any) {
-        
     if (clickCard === undefined) {
         clickCard = event.target.id
+
         for (const cardShirt of cards) {
-            
             if (clickCard === cardShirt.id) {
                 numberCard = cardShirt.name
                 cardShirt.src = arrCard[numberCard]
@@ -289,11 +292,11 @@ function showWin() {
     winBlock.classList.remove('noshow')
     playPage.classList.add('noshow')
     levelBlock.classList.add('noshow')
-    
+
     let popap = new Image()
     popap.src = ImgWin
     popapWin.appendChild(popap)
-    
+
     timerSekShowStop[0].textContent = String(
         seconds < 10 ? '0' + seconds : seconds
     )
@@ -310,11 +313,11 @@ function showLose() {
     loseBlock.classList.remove('noshow')
     playPage.classList.add('noshow')
     levelBlock.classList.add('noshow')
-    
+
     let popap = new Image()
     popap.src = ImgLose
     popapLose.appendChild(popap)
-    
+
     timerSekShowStop[1].textContent = String(
         seconds < 10 ? '0' + seconds : seconds
     )

@@ -1,12 +1,19 @@
 {
     "compilerOptions": {
-        "strict": true,
-        "outDir": "./dist/",
-        "noImplicitAny": true,
-        "module": "es6",
         "target": "es6",
-        "allowJs": false,
+        "module": "es6",
+        "lib": ["es2016", "dom"],
+        "strict": true,
+        "declaration": true,
+        "outDir": "./dist/",
         "sourceMap": true,
-        "moduleResolution": "node"
-    }
+        "noImplicitAny": true,
+        "allowJs": false,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "jsx": "preserve"
+    },
+    //"include": ["src/*"],
+    "exclude": ["node_modules", "**/*.test.ts"],
+    "types": "@types/jest",
 }
