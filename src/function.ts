@@ -1,11 +1,13 @@
-let cardAdd: any
-let cards: any[] = []
+// import { cardAdd, cards } from './index'
 
-function pushNewCards(obj1: any, obj2: any) {
-    let clone = cardAdd.cloneNode(true)
-    cards.push(obj1)
-    cards.push(obj2)
-}
+// //let cardAdd: any
+// //let cards: any[] = []
+
+// function pushNewCards(obj1: any, obj2: any) {
+//     let clone = cardAdd.cloneNode(true)
+//     cards.push(obj1)
+//     cards.push(obj2)
+// }
 
 // let cardAdd: any
 // let cards: any[] = []

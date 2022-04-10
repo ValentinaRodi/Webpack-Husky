@@ -79,25 +79,32 @@ const arrCard = [
     Img36,
 ]
 
-const levelPage = document.querySelector('.fon')!
-const blockLevel = levelPage.querySelector('.block-level')!
-const btnLevel = levelPage.querySelectorAll('.block-btn')!
-const levelDifficulty: any = levelPage.querySelectorAll('.block-level-difficulty')!
-const timerSekShowStop = levelPage.querySelectorAll('.sek')!
-const timerMinShowStop = levelPage.querySelectorAll('.min')!
-const playPage = document.querySelector('.fon-play')!
-const playCard = playPage.querySelector('.play-card')!
-const levelBlock = document.querySelector('.block')!
-const winBlock = document.querySelector('.win')!
-const popapWin = winBlock.querySelector('.popap-img')!
-const loseBlock = document.querySelector('.lose')!
-const popapLose = loseBlock.querySelector('.popap-img')!
-const timerSekShow = playPage.querySelector('.sek')!
-const timerMinShow = playPage.querySelector('.min')!
+const levelPage = document.querySelector('.fon')
+const blockLevel = levelPage?.querySelector('.block-level')
+const btnLevel = document.querySelectorAll('.block-btn')
+const levelDifficulty: any = levelPage?.querySelectorAll(
+    '.block-level-difficulty'
+)
+const timerSekShowStop: any = levelPage?.querySelectorAll('.sek')
+const timerMinShowStop: any = levelPage?.querySelectorAll('.min')
+const playPage = document.querySelector('.fon-play')
+const playCard = playPage?.querySelector('.play-card')
+const levelBlock = document.querySelector('.block')
+const winBlock = document.querySelector('.win')
+const popapWin = winBlock?.querySelector('.popap-img')
+const loseBlock = document.querySelector('.lose')
+const popapLose = loseBlock?.querySelector('.popap-img')
+const timerSekShow = playPage?.querySelector('.sek')
+const timerMinShow = playPage?.querySelector('.min')
 
 let checkLevel: any
 
-blockLevel.addEventListener('click', (event: any) => {
+function levelPageTrue() {
+    if (!levelPage) return
+}
+levelPageTrue()
+
+blockLevel?.addEventListener('click', (event: any) => {
     checkLevel = event.target.value
     for (const levelCheck of levelDifficulty) {
         let lev
@@ -119,12 +126,12 @@ blockLevel.addEventListener('click', (event: any) => {
 let timeMinut = 0
 let intervalID: any
 
-btnLevel[0].addEventListener('click', (event) => {
+btnLevel?.[0].addEventListener('click', (event) => {
     if (!checkLevel) {
         event.preventDefault()
     } else {
-        levelPage.classList.add('noshow')
-        playPage.classList.remove('noshow')
+        levelPage?.classList.add('noshow')
+        playPage?.classList.remove('noshow')
         showScreenCard()
     }
 })
@@ -138,54 +145,66 @@ function showScreenCard() {
         setTimeout(getClikcCard, 7000)
     }
     if (checkLevel === '2') {
-        playCard.classList.add('play-card2')
+        playCard?.classList.add('play-card2')
         getRandomRiver(6, arrCard)
         timeMinut = 10
         intervalID = setInterval(timerDown, 1000)
+
+        setTimeout(getClikcCard, 12000)
     }
     if (checkLevel === '3') {
         getRandomRiver(9, arrCard)
         timeMinut = 20
         intervalID = setInterval(timerDown, 1000)
+
+        setTimeout(getClikcCard, 22000)
     }
 }
 
 function getClikcCard() {
-    const playAddCard: any = playPage.querySelector('.card')!
+    const playAddCard: any = playPage?.querySelector('.card')!
 
     if (playAddCard.src === ImgShirt) {
-        playCard.addEventListener('click', (event: any) => {
+        playCard?.addEventListener('click', (event: any) => {
             getChoseCard(event)
         })
     }
 }
 
-
 let indexCard: any = []
 
-export function getRandomRiver(n: number, arr: string []) {
+function getRandomRiver(n: number, arr: string[]) {
     const indexes = new Set()
+    let indexesSize = 1
     const limit = arr.length
     n = Math.min(n, limit)
     while (indexes.size < n) {
         const index = Math.floor(limit * Math.random())
         indexes.add(index)
-        cardAdd = new Image()
-        cardAdd.src = arrCard[index]
-        cardAdd.name = index
-        cardAdd.classList.add('card')
-        
-        //pushNewCards(cardAdd, cards)
-        let clone = cardAdd.cloneNode(true)
-        cards.push(cardAdd)
-        cards.push(clone)
-        indexCard = index
+
+        if (indexesSize === indexes.size) {
+            indexesSize = indexesSize + 1
+            cardAdd = new Image()
+            cardAdd.src = arrCard[index]
+            cardAdd.name = index
+            cardAdd.classList.add('card')
+            let clone = cardAdd.cloneNode(true)
+            // cards.push(cardAdd)
+            // cards.push(clone)
+            indexCard = index
+            pushNewCards(clone, cardAdd)
+        }
     }
     shuffleArray(cards)
     return
 }
 
-export let cardAdd: any
+export function pushNewCards(obj1: any, obj2: any) {
+    cards.push(obj1)
+    cards.push(obj2)
+}
+
+let cardAdd: any
 export let cards: any[] = []
 
 function shuffleArray(array: any) {
@@ -195,7 +214,7 @@ function shuffleArray(array: any) {
         array[i] = array[j]
         array[j] = temp
         array[i].id = i
-        playCard.appendChild(array[i])
+        playCard?.appendChild(array[i])
     }
 }
 
@@ -204,16 +223,18 @@ function timerDown() {
     if (timeMinut < 0) {
         clearInterval(intervalID)
 
-        const playAddCard: any = playPage.querySelectorAll('.card')!
+        const playAddCard: any = playPage?.querySelectorAll('.card')!
         let cardShirt: any
         for (cardShirt of playAddCard) {
             cardShirt.src = ImgShirt
         }
         intervalID = setInterval(timerUp, 1000)
     } else {
-        timerSekShow.textContent = String(
-            seconds < 10 ? '0' + seconds : seconds
-        )
+        if (timerSekShow!) {
+            timerSekShow.textContent = String(
+                seconds < 10 ? '0' + seconds : seconds
+            )
+        }
     }
     --timeMinut
 }
@@ -263,39 +284,42 @@ function timerUp() {
     if (minutes === 60) {
         clearInterval(intervalID)
         showLose()
-        btnLevel[1].addEventListener('click', () => {
+        btnLevel?.[1].addEventListener('click', () => {
             location.reload()
         })
     } else {
-        timerSekShow.textContent = String(
-            seconds < 10 ? '0' + seconds : seconds
-        )
-        seconds++
-        if (seconds === 60) {
-            seconds = 0
-            minutes++
-            timerMinShow.textContent = String(
-                minutes < 10 ? '0' + minutes : minutes
+        if (timerSekShow! && timerMinShow!) {
+            timerSekShow.textContent = String(
+                seconds < 10 ? '0' + seconds : seconds
             )
+            seconds++
+
+            if (seconds === 60) {
+                seconds = 0
+                minutes++
+                timerMinShow.textContent = String(
+                    minutes < 10 ? '0' + minutes : minutes
+                )
+            }
         }
     }
 }
 
-const playBtn = playPage.querySelector('.play-btn')!
+const playBtn = playPage?.querySelector('.play-btn')!
 
-playBtn.addEventListener('click', () => {
+playBtn?.addEventListener('click', () => {
     location.reload()
 })
 
 function showWin() {
-    levelPage.classList.remove('noshow')
-    winBlock.classList.remove('noshow')
-    playPage.classList.add('noshow')
-    levelBlock.classList.add('noshow')
+    levelPage?.classList.remove('noshow')
+    winBlock?.classList.remove('noshow')
+    playPage?.classList.add('noshow')
+    levelBlock?.classList.add('noshow')
 
     let popap = new Image()
     popap.src = ImgWin
-    popapWin.appendChild(popap)
+    popapWin?.appendChild(popap)
 
     timerSekShowStop[0].textContent = String(
         seconds < 10 ? '0' + seconds : seconds
@@ -303,20 +327,20 @@ function showWin() {
     timerMinShowStop[0].textContent = String(
         minutes < 10 ? '0' + minutes : minutes
     )
-    btnLevel[1].addEventListener('click', () => {
+    btnLevel?.[1].addEventListener('click', () => {
         location.reload()
     })
 }
 
 function showLose() {
-    levelPage.classList.remove('noshow')
-    loseBlock.classList.remove('noshow')
-    playPage.classList.add('noshow')
-    levelBlock.classList.add('noshow')
+    levelPage?.classList.remove('noshow')
+    loseBlock?.classList.remove('noshow')
+    playPage?.classList.add('noshow')
+    levelBlock?.classList.add('noshow')
 
     let popap = new Image()
     popap.src = ImgLose
-    popapLose.appendChild(popap)
+    popapLose?.appendChild(popap)
 
     timerSekShowStop[1].textContent = String(
         seconds < 10 ? '0' + seconds : seconds
@@ -324,7 +348,7 @@ function showLose() {
     timerMinShowStop[1].textContent = String(
         minutes < 10 ? '0' + minutes : minutes
     )
-    btnLevel[2].addEventListener('click', () => {
+    btnLevel?.[2].addEventListener('click', () => {
         location.reload()
     })
 }
