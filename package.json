@@ -15,7 +15,7 @@
             "^.+\\.tsx?$": "babel-jest"
         },
         "setupFilesAfterEnv": [
-            "D:/Work/cmder/hw4/src/function.test.ts"
+            "D:/Work/cmder/hw4/src/index.test.ts"
         ]
     },
     "scripts": {

@@ -126,15 +126,18 @@ blockLevel?.addEventListener('click', (event: any) => {
 let timeMinut = 0
 let intervalID: any
 
-btnLevel?.[0].addEventListener('click', (event) => {
-    if (!checkLevel) {
-        event.preventDefault()
-    } else {
-        levelPage?.classList.add('noshow')
-        playPage?.classList.remove('noshow')
-        showScreenCard()
-    }
-})
+if (blockLevel !== undefined) {
+    btnLevel?.[0].addEventListener('click', (event) => {
+        if (!checkLevel) {
+            event.preventDefault()
+        } else {
+            levelPage?.classList.add('noshow')
+            playPage?.classList.remove('noshow')
+            showScreenCard()
+        }
+    })
+}
+
 
 function showScreenCard() {
     if (checkLevel === '1') {
