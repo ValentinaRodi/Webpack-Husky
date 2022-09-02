@@ -13,11 +13,17 @@
 # Стэк:
 
 • HTML
+
 • SCSS
+
 • JavaScript
+
 • TypeScript
+
 • Pettier
+
 • Eslint
+
 • Webpack
 
 ![GameCard1](https://user-images.githubusercontent.com/94056174/188210040-21605e80-3b91-4ea4-a5f9-dbf40bf8952d.jpg)
