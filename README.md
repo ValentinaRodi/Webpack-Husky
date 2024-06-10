@@ -1,5 +1,7 @@
 # Game_Card-JavaScript
 
+## Деплой: https://game-card-javascript.vercel.app/
+
 Карточная игра, суть которой заключается в том, что нужно разгадать все пары карт
 
 Реализовано: 
